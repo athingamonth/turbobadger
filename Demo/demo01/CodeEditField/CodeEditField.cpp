@@ -19,21 +19,42 @@ void CodeEditField::DrawString(int32 x, int32 y, TBFontFace *font, const TBColor
 
 bool CodeEditField::StringHasColorOverride(const char* str, int32 len, TBColor& colour)
 {
-	char* matchAgainst = "code";
-	int32 matchLen = (int32)strlen(matchAgainst);
-	if (matchLen != len)
-	{
-		return false;
-	}
+	char* keywords[] = {
+		"in",
+		"vec3",
+		"uvec2",
+		"const",
+		"uniform",
+		"void",
+		"if",
+		"float"
+		"vec4",
+		"for"
+	};
 
-	for (int32 i = 0; i < len; i++)
+	for (int32 keywordIdx = 0; keywordIdx < 9; keywordIdx++)
 	{
-		if (toupper(matchAgainst[i]) != toupper(str[i]))
+		char* matchAgainst = keywords[keywordIdx];
+		int32 matchLen = (int32)strlen(matchAgainst);
+		if (matchLen == len)
 		{
-			return false;
+			auto matched = true;
+			for (int32 i = 0; i < len; i++)
+			{
+				if (toupper(matchAgainst[i]) != toupper(str[i]))
+				{
+					matched = false;
+					break;
+				}
+			}
+
+			if (matched)
+			{
+				colour = TBColor(90, 127, 230);
+				return true;
+			}
 		}
 	}
 
-	colour = TBColor(255, 0, 208);
-	return true;
+	return false;
 }
