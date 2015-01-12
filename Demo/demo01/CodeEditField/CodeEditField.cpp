@@ -5,6 +5,13 @@
 
 using namespace tb;
 TB_WIDGET_FACTORY(CodeEditField, TBValue::TYPE_STRING, WIDGET_Z_TOP) {}
+
+CodeEditField::CodeEditField()
+	: TBEditField()
+	, inComment(false)
+{
+}
+
 void CodeEditField::OnInflate(const INFLATE_INFO &info)
 {
 	TBEditField::OnInflate(info);
@@ -17,8 +24,27 @@ void CodeEditField::DrawString(int32 x, int32 y, TBFontFace *font, const TBColor
 	TBEditField::DrawString(x, y, font, finalColor, str, len);
 }
 
+void CodeEditField::OnBreak()
+{
+	inComment = false;
+}
+
 bool CodeEditField::StringHasColorOverride(const char* str, int32 len, TBColor& colour)
 {
+	if (strlen(str) >= 2)
+	{
+		if (str[0] == '/' && str[1] == '/')
+		{
+			inComment = true;
+		}
+	}
+
+	if (inComment)
+	{
+		colour = TBColor(113, 143, 113);
+		return true;
+	}
+
 	char* keywords[] = {
 		"in",
 		"vec3",
@@ -30,10 +56,15 @@ bool CodeEditField::StringHasColorOverride(const char* str, int32 len, TBColor& 
 		"float",
 		"vec4",
 		"for",
-		"uint"
+		"uint",
+		"abs",
+		"sin",
+		"cos",
+		"texture",
+		"int"
 	};
 
-	for (int32 keywordIdx = 0; keywordIdx < 10; keywordIdx++)
+	for (int32 keywordIdx = 0; keywordIdx < 16; keywordIdx++)
 	{
 		char* matchAgainst = keywords[keywordIdx];
 		int32 matchLen = (int32)strlen(matchAgainst);
