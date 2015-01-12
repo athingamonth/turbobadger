@@ -27,12 +27,13 @@ bool CodeEditField::StringHasColorOverride(const char* str, int32 len, TBColor& 
 		"uniform",
 		"void",
 		"if",
-		"float"
+		"float",
 		"vec4",
-		"for"
+		"for",
+		"uint"
 	};
 
-	for (int32 keywordIdx = 0; keywordIdx < 9; keywordIdx++)
+	for (int32 keywordIdx = 0; keywordIdx < 10; keywordIdx++)
 	{
 		char* matchAgainst = keywords[keywordIdx];
 		int32 matchLen = (int32)strlen(matchAgainst);
