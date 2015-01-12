@@ -17,7 +17,7 @@ TBLayout: axis: y, distribution: available
 				TBSkinImage: skin: arrow.down
 				TBTextField: text: Menu
 				skin TBButton.flat
-	TBEditField: multiline: 1, styling: 1, gravity: all, id: editfield, autofocus: 1
+	CodeEditField: multiline: 1, styling: 1, gravity: all, id: editfield, autofocus: 1
 		text: "Turbo Badger - Fast UI toolkit\n\n" \
 				"<color #0794f8>Test zone</color>\n" \
 				"The menu to the left spawns some examples of features in turbo badger.\n\n" \

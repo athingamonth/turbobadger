@@ -91,6 +91,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\demo01\CodeEditField\CodeEditField.cpp" />
     <ClCompile Include="..\demo01\Demo01.cpp" />
     <ClCompile Include="..\demo01\ListWindow.cpp" />
     <ClCompile Include="..\demo01\ResourceEditWindow.cpp" />
@@ -117,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\config.h" />
+    <ClInclude Include="..\demo01\CodeEditField\CodeEditField.h" />
     <ClInclude Include="..\demo01\Demo.h" />
     <ClInclude Include="..\demo01\ListWindow.h" />
     <ClInclude Include="..\demo01\ResourceEditWindow.h" />
